@@ -1,8 +1,17 @@
 import { createSchema } from "@ponder/core";
 
 export default createSchema((p) => ({
-  Account: p.createTable({
+  Optimist: p.createTable({
     id: p.bytes(),
-    balance: p.bigint(),
+    tokenId: p.bigint(),
+    chainId: p.int(),
+    transactionHash: p.bytes(),
+    blockNum: p.bigint(),
   }),
+  CoinbaseQuestAttestation: p.createTable({
+    id: p.bytes(),
+    chainId: p.int(),
+    transactionHash: p.bytes(),
+    blockNum: p.bigint(),
+  })
 }));

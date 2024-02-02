@@ -1,15 +1,10 @@
-import { ponder } from "@/generated";
+import { registerCoinbaseQuestAttestationEvents } from './events/coinbaseQuestAttestation'
+import { registerOptimistEvents } from './events/optimist'
 
-ponder.on("weth9:Deposit", async ({ event, context }) => {
-  const { Account } = context.db;
+function main() {
+  // TODO: create loggers and sentry instances to pass to event handlers
+  registerOptimistEvents()
+  registerCoinbaseQuestAttestationEvents()
+}
 
-  await Account.upsert({
-    id: event.args.dst,
-    create: {
-      balance: event.args.wad,
-    },
-    update: ({ current }) => ({
-      balance: current.balance + event.args.wad,
-    }),
-  });
-});
+main()
